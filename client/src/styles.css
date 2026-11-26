@@ -186,6 +186,8 @@ td { padding: 12px 18px; border-top: 1px solid var(--line); white-space: nowrap;
 .auth-card h2 { font-size: 26px; font-weight: 600; }
 .auth-card > .muted { margin: 4px 0 24px; }
 .auth-foot { text-align: center; margin-top: 20px; color: var(--muted); }
+.forgot { text-align: right; margin-top: 6px; font-size: 13px; }
+.ok-msg { background: var(--green-soft); color: var(--green); padding: 12px 14px; border-radius: 12px; }
 
 /* ---------- small screens ---------- */
 @media (max-width: 900px) {

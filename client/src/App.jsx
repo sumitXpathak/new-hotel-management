@@ -8,6 +8,8 @@ import Dashboard from './pages/Dashboard';
 import Bookings from './pages/Bookings';
 import Rooms from './pages/Rooms';
 import Guests from './pages/Guests';
+import ForgotPassword from './pages/forgotpassword';
+import ResetPassword from './pages/resetpassword';
 
 function Protected({ children }) {
   const { user, loading } = useAuth();
@@ -28,6 +30,8 @@ export default function App() {
         {/* HashRouter keeps routing on the client, so no server rewrites are needed (works on Vercel as is) */}
         <HashRouter>
           <Routes>
+            <Route path="/forgot-password" element={<Guest><ForgotPassword /></Guest>} />
+            <Route path="/reset-password" element={<Guest><ResetPassword /></Guest>} />
             <Route path="/login" element={<Guest><Login /></Guest>} />
             <Route path="/signup" element={<Guest><Signup /></Guest>} />
             <Route element={<Protected><Layout /></Protected>}>
