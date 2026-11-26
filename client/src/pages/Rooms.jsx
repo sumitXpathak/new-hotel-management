@@ -46,7 +46,9 @@ export default function Rooms() {
     <>
       <div className="page-head">
         <div><h1>Rooms</h1><p className="muted">{rooms.length} rooms</p></div>
-        <button className="btn primary" onClick={() => setEditing('new')}>Add room</button>
+        {user.role === 'admin' && (
+          <button className="btn primary" onClick={() => setEditing('new')}>Add room</button>
+        )}
       </div>
 
       <div className="filters">
@@ -70,7 +72,9 @@ export default function Rooms() {
                 <p className="muted">Floor {r.floor} · sleeps {r.capacity}</p>
                 <div className="chips">{r.amenities.map((a) => <span key={a}>{a}</span>)}</div>
                 <div className="room-actions">
-                  <button className="btn soft sm" onClick={() => setEditing(r)}><Pencil size={14} /> Edit</button>
+                  {user.role === 'admin' && (
+                    <button className="btn soft sm" onClick={() => setEditing(r)}><Pencil size={14} /> Edit</button>
+                  )}
                   {user.role === 'admin' && (
                     <button className="btn ghost sm danger" onClick={() => remove(r)}><Trash2 size={14} /> Delete</button>
                   )}

@@ -25,11 +25,15 @@ router.get('/', wrap(async (req, res) => {
 }));
 
 router.post('/', wrap(async (req, res) => {
-  const { guest, room, adults } = req.body;
+  const { guest, room } = req.body;
+  const adults = Number(req.body.adults);
   const checkIn = new Date(req.body.checkIn);
   const checkOut = new Date(req.body.checkOut);
   if (isNaN(checkIn) || isNaN(checkOut) || checkOut <= checkIn) {
     throw httpError(400, 'Check-out must be after check-in.');
+  }
+  if (!Number.isInteger(adults) || adults < 1) {
+    throw httpError(400, 'Adults must be a whole number greater than zero.');
   }
 
   const [roomDoc, guestDoc] = await Promise.all([Room.findById(room), Guest.findById(guest)]);

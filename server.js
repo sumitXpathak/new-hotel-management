@@ -41,7 +41,10 @@ app.use((err, req, res, next) => {
     status = 409;
     message = `That ${Object.keys(err.keyPattern || {})[0] || 'value'} already exists.`;
   }
-  if (status === 500) console.error(err);
+  if (status === 500) {
+    console.error(err);
+    if (process.env.NODE_ENV === 'production') message = 'An unexpected server error occurred.';
+  }
   res.status(status).json({ error: message });
 });
 

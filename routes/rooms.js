@@ -20,11 +20,11 @@ router.get('/available', wrap(async (req, res) => {
   res.json(await Room.find({ status: 'active', _id: { $nin: busy } }).sort({ number: 1 }));
 }));
 
-router.post('/', wrap(async (req, res) => {
+router.post('/', requireAdmin, wrap(async (req, res) => {
   res.status(201).json(await Room.create(req.body));
 }));
 
-router.put('/:id', wrap(async (req, res) => {
+router.put('/:id', requireAdmin, wrap(async (req, res) => {
   const room = await Room.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
   if (!room) throw httpError(404, 'Room not found.');
   res.json(room);
